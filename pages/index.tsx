@@ -1,124 +1,174 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/index.module.scss";
 
-const inter = Inter({ subsets: ['latin'] })
+interface HorizontalGapTypes {
+  gap: number;
+}
+
+interface DropdownBoxTypes {
+  options: string[];
+}
+
+interface RecordsColumnTypes {
+  entries: string[];
+}
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <Navbar />
+      <div className={styles.main}>
+        <Sidebar />
+        <div className={styles.content}>
+          <ColumnTitles />
+          <FiltersDiv />
+          <Records />
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+function Navbar() {
+  return (
+    <div className={styles.navbar}>
+      <img src="carbonEyeLogo.png" className={styles.img} />
+    </div>
+  );
+}
+
+function Sidebar() {
+  return (
+    <div className={styles.sidebar}>
+      <h1 className={styles.title}>Records</h1>
+    </div>
+  );
+}
+
+function ColumnTitles() {
+  return (
+    <div className={styles.columnTitlesDiv}>
+      <h1>Record Date</h1>
+      <h1>Subcontractor</h1>
+      <h1>Product Type</h1>
+      <h1>Embodied Carbon</h1>
+    </div>
+  );
+}
+
+function FiltersDiv() {
+  return (
+    <div className={styles.filtersDiv}>
+      <HorizontalGap gap={90} />
+      <InputBox />
+      <HorizontalGap gap={170} />
+      <DropdownBox
+        options={["", "Subcontractor 1", "Subcontractor 2", "Subcontractor 3"]}
+      />
+      <HorizontalGap gap={170} />
+      <DropdownBox
+        options={["", "Product Type 1", "Product Type 2", "Product Type 3"]}
+      />
+    </div>
+  );
+}
+
+function InputBox() {
+  return (
+    <div className={styles.inputBox}>
+      <span className="text-gray-400 mr-3">
+        <svg
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 21l-4.35-4.35"></path>
+          <circle cx="8.5" cy="8.5" r="7.5"></circle>
+        </svg>
+      </span>
+      <input
+        className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+        type="text"
+        placeholder="Search..."
+      />
+    </div>
+  );
+}
+
+function DropdownBox({ options }: DropdownBoxTypes) {
+  return (
+    <div className={styles.dropdownBox}>
+      <select className="block appearance-none w-full bg-transparent border border-gray-300 text-gray-700 h-8 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+        {options.map((option) => {
+          return <option>{option}</option>;
+        })}
+      </select>
+      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+          <path d="M10 12l-6-6 1.41-1.41L10 9.17l4.59-4.58L16 6l-6 6z" />
+        </svg>
       </div>
+    </div>
+  );
+}
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+function Records() {
+  return (
+    <div className={styles.recordsContainer}>
+      <HorizontalGap gap={130} />
+      <RecordsColumn
+        entries={[
+          "10/04/2023",
+          "11/04/2023",
+          "12/04/2023",
+          "13/04/2023",
+          "14/04/2023",
+          "...",
+        ]}
+      />
+      <HorizontalGap gap={240} />
+      <RecordsColumn
+        entries={[
+          "Cilantro",
+          "Byrne Bros",
+          "Platt & Reilly",
+          "Stanmore",
+          "Harveys",
+          "...",
+        ]}
+      />
+      <HorizontalGap gap={210} />
+      <RecordsColumn
+        entries={[
+          "Electical Cables",
+          "Structures",
+          "Drylining",
+          "Drylining",
+          "Paint",
+          "...",
+        ]}
+      />
+      <HorizontalGap gap={290} />
+      <RecordsColumn entries={["xxx", "xxx", "xxx", "xxx", "xxx", "..."]} />
+    </div>
+  );
+}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+function RecordsColumn({ entries }: RecordsColumnTypes) {
+  return (
+    <div className={styles.recordsColumn}>
+      {entries.map((entry) => {
+        return <p>{entry}</p>;
+      })}
+    </div>
+  );
+}
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+function HorizontalGap({ gap }: HorizontalGapTypes) {
+  return <div style={{ width: gap }} />;
 }

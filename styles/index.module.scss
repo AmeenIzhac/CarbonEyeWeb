@@ -1,0 +1,77 @@
+.navbar {
+  margin-top: 30px;
+  width: 100%;
+  border-top: solid;
+  border-right: solid;
+  border-bottom: solid;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  width: 20vw;
+  height: 100vh;
+  border-right: solid;
+  background-color: grey;
+}
+
+.content {
+  width: 80vw;
+  height: 100vh;
+}
+
+.title {
+  margin-top: 60px;
+  margin-left: 70px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.columnTitlesDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.filtersDiv {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.375rem;
+  width: 100%;
+  padding: 6px;
+}
+
+.inputBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  width: 200px;
+  height: 32px;
+}
+
+.dropdownBox {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+}
+
+.recordsContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  font-size: 24px;
+}
+
+.recordsColumn {
+}
