@@ -104,8 +104,8 @@ function DropdownBox({ options }: DropdownBoxTypes) {
   return (
     <div className={styles.dropdownBox}>
       <select className="block appearance-none w-full bg-transparent border border-gray-300 text-gray-700 h-8 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-        {options.map((option) => {
-          return <option>{option}</option>;
+        {options.map((option, index) => {
+          return <option key={index}>{option}</option>;
         })}
       </select>
       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -162,8 +162,8 @@ function Records() {
 function RecordsColumn({ entries }: RecordsColumnTypes) {
   return (
     <div className={styles.recordsColumn}>
-      {entries.map((entry) => {
-        return <p>{entry}</p>;
+      {entries.map((entry, index) => {
+        return <p key={index}>{entry}</p>;
       })}
     </div>
   );
