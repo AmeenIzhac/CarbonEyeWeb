@@ -1,4 +1,5 @@
 import styles from "@/styles/ProjectPage.module.scss";
+import { useRouter } from "next/router";
 
 interface DropdownBoxTypes {
   options: string[];
@@ -25,17 +26,31 @@ export default function ProjectPage() {
 }
 
 function Navbar() {
+  const router = useRouter();
+  function handleClick() {
+    router.push("/");
+  }
+
   return (
     <div className={styles.navbar}>
-      <img src="carbonEyeLogo.png" />
+      <img src="carbonEyeLogo.png" onClick={handleClick} />
     </div>
   );
 }
 
 function Sidebar() {
+  const router = useRouter();
+
+  function handleClick() {
+    router.push("/GraphsPage");
+  }
+
   return (
     <div className={styles.sidebar}>
       <h1 className={styles.title}>Records</h1>
+      <button className={styles.viewGraphsButton} onClick={handleClick}>
+        View Graphs
+      </button>
     </div>
   );
 }
